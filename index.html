@@ -146,10 +146,136 @@
       transform: translateY(-2px) scale(1.02);
       box-shadow: 0 6px 20px rgba(0, 119, 182, 0.45);
     }
+    .write-review-btn {
+      background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+      color: #ffffff;
+      border: none;
+      padding: 10px 20px;
+      font-size: 0.92rem;
+      font-weight: bold;
+      border-radius: 30px;
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(245, 158, 11, 0.3);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .write-review-btn:hover {
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 0 6px 20px rgba(245, 158, 11, 0.45);
+    }
+    .reviews-btn-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
     @media (max-width: 650px) {
       .reviews-section { flex-direction: column; align-items: flex-start; }
       .reviews-right { align-items: flex-start; width: 100%; }
+      .form-row { flex-direction: column; }
     }
+
+    /* ===== レビュー投稿フォーム ===== */
+    .review-form-box {
+      background: #ffffff;
+      border: 2px solid #bae6fd;
+      border-radius: 14px;
+      padding: 16px 18px;
+      margin-bottom: 18px;
+      box-shadow: 0 4px 12px rgba(0, 119, 182, 0.06);
+    }
+    .review-form-title {
+      font-size: 1.05rem;
+      font-weight: bold;
+      color: #0077b6;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .form-row {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+    .form-group {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .form-group label {
+      font-size: 0.78rem;
+      font-weight: bold;
+      color: #334155;
+    }
+    .form-input, .form-select, .form-textarea {
+      padding: 8px 12px;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      font-family: inherit;
+      outline: none;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+    .form-input:focus, .form-select:focus, .form-textarea:focus {
+      border-color: #0077b6;
+      box-shadow: 0 0 0 3px rgba(0, 119, 182, 0.15);
+    }
+    .form-textarea {
+      resize: vertical;
+      min-height: 68px;
+      width: 100%;
+    }
+    .star-Input-wrap {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      padding-top: 4px;
+    }
+    .star-btn {
+      font-size: 1.35rem;
+      cursor: pointer;
+      color: #cbd5e1;
+      transition: transform 0.15s ease, color 0.15s ease;
+      user-select: none;
+    }
+    .star-btn.selected {
+      color: #f59e0b;
+    }
+    .star-btn:hover {
+      transform: scale(1.2);
+    }
+    .submit-review-btn {
+      margin-top: 10px;
+      background: linear-gradient(135deg, #0077b6 0%, #00b4d8 100%);
+      color: #ffffff;
+      border: none;
+      padding: 9px 22px;
+      border-radius: 25px;
+      font-size: 0.88rem;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 3px 10px rgba(0, 119, 182, 0.25);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .submit-review-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 14px rgba(0, 119, 182, 0.35);
+    }
+    .delete-review-btn {
+      margin-left: auto;
+      background: #fee2e2;
+      color: #dc2626;
+      border: none;
+      padding: 2px 8px;
+      border-radius: 6px;
+      font-size: 0.72rem;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .delete-review-btn:hover { background: #fecaca; }
 
     /* ===== ポップアップ・モーダル（Dami Style） ===== */
     .modal-overlay {
@@ -399,20 +525,23 @@
       </div>
     </section>
 
-    <!-- 参加者の感想（サイド配置・大きめ・クリックで開く） -->
+    <!-- 参加者の感想（サイド配置・大きめ・クリックで開く＆投稿できる） -->
     <section class="reviews-section">
-      <div class="reviews-left" onclick="openReviews('all')">
+      <div class="reviews-left" onclick="openReviews('all', false)">
         <h2 class="reviews-main-title">💬 参加者の感想</h2>
-        <p class="reviews-sub">クリックすると参加した学生の感想（各2件・全8件）が開きます。</p>
+        <p class="reviews-sub">クリックすると参加者の感想を見たり、自分の感想を投稿したりできます。</p>
       </div>
 
       <div class="reviews-right">
-        <button class="open-all-btn" onclick="openReviews('all')">✨ 参加者の感想（全8件）を見る ➔</button>
+        <div class="reviews-btn-group">
+          <button class="write-review-btn" onclick="openReviews('all', true)">✍️ 感想を書く（レビュー投稿）</button>
+          <button class="open-all-btn" onclick="openReviews('all', false)">✨ 参加者の感想を見る ➔</button>
+        </div>
         <div class="spot-pills">
-          <button class="spot-pill" onclick="openReviews('spot1')">🍽️ はとばキッチン</button>
-          <button class="spot-pill" onclick="openReviews('spot2')">🚢 駿河湾クルーズ</button>
-          <button class="spot-pill" onclick="openReviews('spot3')">🌲 三保の松原</button>
-          <button class="spot-pill" onclick="openReviews('spot4')">⛩️ 久能山東照宮</button>
+          <button class="spot-pill" onclick="openReviews('spot1', false)">🍽️ はとばキッチン</button>
+          <button class="spot-pill" onclick="openReviews('spot2', false)">🚢 駿河湾クルーズ</button>
+          <button class="spot-pill" onclick="openReviews('spot3', false)">🌲 三保の松原</button>
+          <button class="spot-pill" onclick="openReviews('spot4', false)">⛩️ 久能山東照宮</button>
         </div>
       </div>
     </section>
@@ -429,14 +558,64 @@
 
       <!-- スポット切り替えタブ -->
       <div class="modal-tabs">
-        <button class="modal-tab active" data-filter="all" onclick="openReviews('all')">✨ 全8件すべて</button>
-        <button class="modal-tab" data-filter="spot1" onclick="openReviews('spot1')">🍽️ はとばキッチン (2)</button>
-        <button class="modal-tab" data-filter="spot2" onclick="openReviews('spot2')">🚢 駿河湾クルーズ (2)</button>
-        <button class="modal-tab" data-filter="spot3" onclick="openReviews('spot3')">🌲 三保の松原 (2)</button>
-        <button class="modal-tab" data-filter="spot4" onclick="openReviews('spot4')">⛩️ 久能山東照宮 (2)</button>
+        <button class="modal-tab active" data-filter="all" onclick="openReviews('all', false)">✨ すべて表示</button>
+        <button class="modal-tab" data-filter="spot1" onclick="openReviews('spot1', false)">🍽️ はとばキッチン</button>
+        <button class="modal-tab" data-filter="spot2" onclick="openReviews('spot2', false)">🚢 駿河湾クルーズ</button>
+        <button class="modal-tab" data-filter="spot3" onclick="openReviews('spot3', false)">🌲 三保の松原</button>
+        <button class="modal-tab" data-filter="spot4" onclick="openReviews('spot4', false)">⛩️ 久能山東照宮</button>
+        <button class="modal-tab" style="margin-left:auto; background:#fef3c7; color:#b45309; border-color:#fcd34d;" onclick="toggleForm()">✍️ 感想を書く</button>
       </div>
 
-      <div class="modal-body">
+      <div class="modal-body" id="modalBody">
+
+        <!-- レビュー投稿フォーム -->
+        <div class="review-form-box" id="reviewFormBox">
+          <div class="review-form-title">
+            <span>✍️ あなたの感想（レビュー）を投稿する</span>
+          </div>
+          <form id="reviewForm" onsubmit="submitReview(event)">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="reviewSpot">📍 スポットを選ぶ</label>
+                <select id="reviewSpot" class="form-select" required>
+                  <option value="spot1">🍽️ はとばキッチン</option>
+                  <option value="spot2">🚢 駿河湾クルーズ</option>
+                  <option value="spot3">🌲 三保の松原</option>
+                  <option value="spot4">⛩️ 久能山東照宮</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="reviewAuthor">👤 学科・お名前（ニックネーム可）</label>
+                <input type="text" id="reviewAuthor" class="form-input" placeholder="例：コンピュータ科 1年・タロウ" required>
+              </div>
+              <div class="form-group" style="flex: 0.7;">
+                <label>⭐ おすすめ度（クリックで選択）</label>
+                <div class="star-Input-wrap" id="starSelector">
+                  <span class="star-btn selected" data-val="1" onclick="setRating(1)">★</span>
+                  <span class="star-btn selected" data-val="2" onclick="setRating(2)">★</span>
+                  <span class="star-btn selected" data-val="3" onclick="setRating(3)">★</span>
+                  <span class="star-btn selected" data-val="4" onclick="setRating(4)">★</span>
+                  <span class="star-btn selected" data-val="5" onclick="setRating(5)">★</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="reviewTitle">💡 タイトル（一言まとめ）</label>
+                <input type="text" id="reviewTitle" class="form-input" placeholder="例：最高の思い出になりました！" required>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="reviewComment">💬 感想メッセージ</label>
+              <textarea id="reviewComment" class="form-textarea" placeholder="旅行の感想や楽しかったことを自由に入力してください..." required></textarea>
+            </div>
+
+            <button type="submit" class="submit-review-btn">🚀 感想を投稿する</button>
+          </form>
+        </div>
+
         <div class="modal-reviews-grid" id="modalReviewsGrid">
 
           <!-- 1. はとばキッチン (1) -->
@@ -579,20 +758,50 @@
 
   <script>
     const spotTitles = {
-      all: '💬 参加者の感想（全8件）',
+      all: '💬 参加者の感想',
       spot1: '🍽️ エスパルスドリームプラザ「はとばキッチン」の感想',
       spot2: '🚢 駿河湾クルーズ（清水港）の感想',
       spot3: '🌲 三保の松原の感想',
       spot4: '⛩️ 久能山東照宮の感想'
     };
 
-    function openReviews(filter) {
+    const spotBadgeLabels = {
+      spot1: '🍽️ はとばキッチン',
+      spot2: '🚢 駿河湾クルーズ',
+      spot3: '🌲 三保の松原',
+      spot4: '⛩️ 久能山東照宮'
+    };
+
+    let currentRating = 5;
+    let currentFilter = 'all';
+
+    function setRating(val) {
+      currentRating = val;
+      document.querySelectorAll('#starSelector .star-btn').forEach(star => {
+        const starVal = parseInt(star.getAttribute('data-val'), 10);
+        star.classList.toggle('selected', starVal <= val);
+      });
+    }
+
+    function toggleForm() {
+      const formBox = document.getElementById('reviewFormBox');
+      const authorInput = document.getElementById('reviewAuthor');
+      formBox.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      setTimeout(() => authorInput.focus(), 250);
+    }
+
+    function openReviews(filter, focusForm) {
+      currentFilter = filter;
       const modal = document.getElementById('reviewModal');
       const title = document.getElementById('modalTitle');
       const cards = document.querySelectorAll('#modalReviewsGrid .review-card');
-      const tabs = document.querySelectorAll('.modal-tab');
+      const tabs = document.querySelectorAll('.modal-tab[data-filter]');
 
       title.textContent = spotTitles[filter] || spotTitles.all;
+
+      if (filter !== 'all') {
+        document.getElementById('reviewSpot').value = filter;
+      }
 
       tabs.forEach(tab => {
         tab.classList.toggle('active', tab.getAttribute('data-filter') === filter);
@@ -608,6 +817,85 @@
 
       modal.classList.add('active');
       document.body.style.overflow = 'hidden';
+
+      if (focusForm) {
+        setTimeout(() => {
+          document.getElementById('reviewAuthor').focus();
+        }, 250);
+      }
+    }
+
+    function createReviewElement(review, isCustom, index) {
+      const div = document.createElement('div');
+      div.className = 'review-card';
+      div.setAttribute('data-spot', review.spot);
+      if (isCustom) div.setAttribute('data-custom-idx', index);
+
+      const starsStr = '★'.repeat(review.rating) + '☆'.repeat(5 - review.rating);
+
+      div.innerHTML = `
+        <div class="review-top">
+          <span class="review-spot-badge">${spotBadgeLabels[review.spot] || '💬 感想'}</span>
+          <span class="review-stars">${starsStr}</span>
+          ${isCustom ? `<button class="delete-review-btn" onclick="deleteCustomReview(${index})" title="削除">🗑️ 削除</button>` : ''}
+        </div>
+        <div class="review-user">
+          <div class="review-avatar">🙋</div>
+          <div class="review-meta">
+            <span class="review-title">「${escapeHtml(review.title)}」</span>
+            <span class="review-author">${escapeHtml(review.author)}</span>
+          </div>
+        </div>
+        <p class="review-text">${escapeHtml(review.comment)}</p>
+      `;
+      return div;
+    }
+
+    function escapeHtml(str) {
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+
+    function loadCustomReviews() {
+      document.querySelectorAll('#modalReviewsGrid .review-card[data-custom-idx]').forEach(el => el.remove());
+      const saved = JSON.parse(localStorage.getItem('travel_custom_reviews') || '[]');
+      const grid = document.getElementById('modalReviewsGrid');
+      saved.forEach((rev, idx) => {
+        const card = createReviewElement(rev, true, idx);
+        grid.insertBefore(card, grid.firstChild);
+      });
+    }
+
+    function submitReview(event) {
+      event.preventDefault();
+      const spot = document.getElementById('reviewSpot').value;
+      const author = document.getElementById('reviewAuthor').value.trim();
+      const title = document.getElementById('reviewTitle').value.trim();
+      const comment = document.getElementById('reviewComment').value.trim();
+
+      if (!author || !title || !comment) return;
+
+      const saved = JSON.parse(localStorage.getItem('travel_custom_reviews') || '[]');
+      saved.push({ spot, author, title, comment, rating: currentRating });
+      localStorage.setItem('travel_custom_reviews', JSON.stringify(saved));
+
+      document.getElementById('reviewTitle').value = '';
+      document.getElementById('reviewComment').value = '';
+      setRating(5);
+
+      loadCustomReviews();
+      openReviews(currentFilter, false);
+    }
+
+    function deleteCustomReview(index) {
+      const saved = JSON.parse(localStorage.getItem('travel_custom_reviews') || '[]');
+      saved.splice(index, 1);
+      localStorage.setItem('travel_custom_reviews', JSON.stringify(saved));
+      loadCustomReviews();
+      openReviews(currentFilter, false);
     }
 
     function closeReviews() {
@@ -625,6 +913,8 @@
     document.addEventListener('keydown', function(e) {
       if (e.key === 'Escape') closeReviews();
     });
+
+    loadCustomReviews();
   </script>
 
 </body>
