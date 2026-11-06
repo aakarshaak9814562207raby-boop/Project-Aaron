@@ -11,11 +11,11 @@
     .hero {
       background-image: linear-gradient(rgba(0, 119, 182, 0.5), rgba(0, 180, 216, 0.5)), url('images/main/fuji.jpg');
       background-size: cover; background-position: center;
-      color: #ffffff; text-align: center; padding: 160px 20px;
+      color: #ffffff; text-align: center; padding: 100px 20px;
     }
-    .hero-sub { font-size: 1.3rem; letter-spacing: 0.1em; opacity: 0.9; margin-bottom: 10px; }
-    .hero-title { font-size: 2.6rem; font-weight: 700; margin-bottom: 14px; }
-    .hero-desc { font-size: 1.3rem; opacity: 0.95; }
+    .hero-sub { font-size: 1.25rem; letter-spacing: 0.1em; opacity: 0.9; margin-bottom: 6px; }
+    .hero-title { font-size: 2.2rem; font-weight: 700; margin-bottom: 8px; }
+    .hero-desc { font-size: 1.25rem; opacity: 0.95; }
 
     .container { max-width: 860px; margin: 0 auto; padding: 14px 20px; }
     .section-title { text-align: center; font-size: 1.3rem; color: #0077b6; margin-bottom: 6px; position: relative; }
@@ -25,7 +25,7 @@
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       gap: 12px;
-      margin-bottom: 16px;
+      margin-bottom: 22px;
     }
     
     /* कार्डलाई लिङ्क जस्तो बनाउने */
@@ -36,6 +36,8 @@
     }
     @media (max-width: 650px) {
       .spots-grid { grid-template-columns: 1fr; }
+      .review-trigger-grid { grid-template-columns: 1fr; }
+      .modal-reviews-grid { grid-template-columns: 1fr; }
     }
     .spot-card:hover { transform: translateY(-3px); box-shadow: 0 6px 15px rgba(0, 0, 0, 0.12); }
     
@@ -46,10 +48,280 @@
     .spot-text { font-size: 0.8rem; color: #555555; margin-bottom: 5px; line-height: 1.35; }
     .spot-footer { margin-top: auto; padding-top: 4px; border-top: 1px dashed #cbd5e1; font-size: 0.78rem; font-weight: bold; color: #0077b6; text-align: right; }
 
-    .info-box { background: #e8f4f8; border-left: 4px solid #0077b6; padding: 10px 16px; border-radius: 4px; margin-bottom: 14px; }
-    .info-box h3 { font-size: 0.95rem; color: #0077b6; margin-bottom: 4px; }
-    .info-list { list-style: none; font-size: 0.85rem; }
-    .info-list li { margin-bottom: 2px; }
+    .info-box { background: #e8f4f8; border-left: 4px solid #0077b6; padding: 14px 20px; border-radius: 4px; margin-bottom: 16px; }
+    .info-box h3 { font-size: 1.25rem; color: #0077b6; margin-bottom: 6px; }
+    .info-list { list-style: none; font-size: 1rem; }
+    .info-list li { margin-bottom: 4px; }
+
+    /* ===== 参加者の感想（サイド配置・大きめ・クリックで開くスタイル） ===== */
+    .reviews-section {
+      margin-top: 8px;
+      margin-bottom: 18px;
+      background: linear-gradient(135deg, #e8f4f8 0%, #f0f9ff 100%);
+      border-left: 5px solid #0077b6;
+      border-radius: 10px;
+      padding: 14px 20px;
+      box-shadow: 0 4px 14px rgba(0, 119, 182, 0.08);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .reviews-left {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      cursor: pointer;
+    }
+
+    .reviews-main-title {
+      font-size: 1.55rem;
+      font-weight: 800;
+      color: #0077b6;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      letter-spacing: 0.03em;
+      transition: color 0.2s ease;
+    }
+    .reviews-left:hover .reviews-main-title {
+      color: #005f9c;
+    }
+
+    .reviews-sub {
+      font-size: 0.85rem;
+      color: #475569;
+    }
+
+    .reviews-right {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 8px;
+    }
+
+    .spot-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .spot-pill {
+      background: #ffffff;
+      color: #0077b6;
+      border: 1px solid #7dd3fc;
+      padding: 4px 11px;
+      border-radius: 20px;
+      font-size: 0.78rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.04);
+    }
+    .spot-pill:hover {
+      background: #0077b6;
+      color: #ffffff;
+      border-color: #0077b6;
+      transform: translateY(-2px);
+    }
+
+    .open-all-btn {
+      background: linear-gradient(135deg, #0077b6 0%, #00b4d8 100%);
+      color: #ffffff;
+      border: none;
+      padding: 10px 22px;
+      font-size: 0.95rem;
+      font-weight: bold;
+      border-radius: 30px;
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(0, 119, 182, 0.3);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .open-all-btn:hover {
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 0 6px 20px rgba(0, 119, 182, 0.45);
+    }
+    @media (max-width: 650px) {
+      .reviews-section { flex-direction: column; align-items: flex-start; }
+      .reviews-right { align-items: flex-start; width: 100%; }
+    }
+
+    /* ===== ポップアップ・モーダル（Dami Style） ===== */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.65);
+      backdrop-filter: blur(6px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      z-index: 1000;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+    .modal-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+    .modal-box {
+      background: #f8fafc;
+      width: 100%;
+      max-width: 780px;
+      max-height: 88vh;
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+      transform: translateY(30px) scale(0.94);
+      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      flex-direction: column;
+    }
+    .modal-overlay.active .modal-box {
+      transform: translateY(0) scale(1);
+    }
+
+    .modal-header {
+      background: linear-gradient(135deg, #0077b6 0%, #00b4d8 100%);
+      color: #ffffff;
+      padding: 18px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .modal-header-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .modal-close {
+      background: rgba(255, 255, 255, 0.2);
+      border: none;
+      color: #ffffff;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      font-size: 1.1rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+    .modal-close:hover {
+      background: rgba(255, 255, 255, 0.35);
+      transform: rotate(90deg);
+    }
+
+    /* モーダル内のフィルタータブ */
+    .modal-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      padding: 12px 20px;
+      background: #ffffff;
+      border-bottom: 1px solid #e2e8f0;
+    }
+    .modal-tab {
+      background: #f1f5f9;
+      color: #475569;
+      border: 1px solid #cbd5e1;
+      padding: 5px 12px;
+      border-radius: 20px;
+      font-size: 0.78rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .modal-tab:hover {
+      background: #e0f2fe;
+      color: #0077b6;
+      border-color: #7dd3fc;
+    }
+    .modal-tab.active {
+      background: #0077b6;
+      color: #ffffff;
+      border-color: #0077b6;
+      box-shadow: 0 2px 8px rgba(0, 119, 182, 0.3);
+    }
+
+    .modal-body {
+      padding: 20px;
+      overflow-y: auto;
+    }
+    .modal-reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+    }
+
+    .review-card {
+      background: #ffffff;
+      border-radius: 14px;
+      padding: 16px;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+      border: 1px solid #e2e8f0;
+      border-top: 4px solid #00b4d8;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      animation: fadeUp 0.35s ease forwards;
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .review-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px dashed #e2e8f0;
+      padding-bottom: 6px;
+    }
+    .review-spot-badge {
+      background: #e0f2fe;
+      color: #0077b6;
+      font-size: 0.72rem;
+      font-weight: bold;
+      padding: 3px 10px;
+      border-radius: 20px;
+    }
+    .review-stars { color: #f59e0b; font-size: 0.85rem; letter-spacing: 1px; }
+    .review-user {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .review-avatar {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #e0f2fe, #bae6fd);
+      color: #0077b6;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.15rem;
+      flex-shrink: 0;
+    }
+    .review-meta { display: flex; flex-direction: column; }
+    .review-title { font-size: 0.92rem; font-weight: bold; color: #0f172a; }
+    .review-author { font-size: 0.75rem; color: #0077b6; font-weight: 600; }
+    .review-text {
+      font-size: 0.84rem;
+      color: #334155;
+      line-height: 1.55;
+      background: #f8fafc;
+      padding: 10px 12px;
+      border-radius: 8px;
+      border-left: 3px solid #38bdf8;
+    }
 
     footer { text-align: center; padding: 12px 20px; background: #1e293b; color: #94a3b8; font-size: 0.78rem; }
   </style>
@@ -107,7 +379,7 @@
           <span class="spot-tag">世界文化遺産</span>
           <div class="spot-body">
             <img src="images/main/image3.jpg" alt="三保の松原" style="width:100%; height:85px; object-fit:cover; border-radius:6px; margin-bottom:5px;">
-            <h3 class="spot-title">三保の松原（みほのまつばら）</h3>
+            <h3 class="spot-title">三保の松原</h3>
             <p class="spot-text">青い海と緑の松林、富士山の絶景名所。「羽衣伝説」の舞台を散策。</p>
             <div class="spot-footer">Clickして詳細へ ➔</div>
           </div>
@@ -118,7 +390,7 @@
           <span class="spot-tag">国宝・パワースポット</span>
           <div class="spot-body">
             <img src="images/main/image4.jpg" alt="久能山東照宮" style="width:100%; height:85px; object-fit:cover; border-radius:6px; margin-bottom:5px;">
-            <h3 class="spot-title">久能山東照宮（くのうざんとうしょうぐう）</h3>
+            <h3 class="spot-title">久能山東照宮</h3>
             <p class="spot-text">徳川家康公が眠る国宝の社殿。歴史とパワーあふれる名所を見学。</p>
             <div class="spot-footer">Clickして詳細へ ➔</div>
           </div>
@@ -127,12 +399,233 @@
       </div>
     </section>
 
+    <!-- 参加者の感想（サイド配置・大きめ・クリックで開く） -->
+    <section class="reviews-section">
+      <div class="reviews-left" onclick="openReviews('all')">
+        <h2 class="reviews-main-title">💬 参加者の感想</h2>
+        <p class="reviews-sub">クリックすると参加した学生の感想（各2件・全8件）が開きます。</p>
+      </div>
+
+      <div class="reviews-right">
+        <button class="open-all-btn" onclick="openReviews('all')">✨ 参加者の感想（全8件）を見る ➔</button>
+        <div class="spot-pills">
+          <button class="spot-pill" onclick="openReviews('spot1')">🍽️ はとばキッチン</button>
+          <button class="spot-pill" onclick="openReviews('spot2')">🚢 駿河湾クルーズ</button>
+          <button class="spot-pill" onclick="openReviews('spot3')">🌲 三保の松原</button>
+          <button class="spot-pill" onclick="openReviews('spot4')">⛩️ 久能山東照宮</button>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- ポップアップ・モーダル -->
+  <div class="modal-overlay" id="reviewModal" onclick="handleOverlayClick(event)">
+    <div class="modal-box">
+      <div class="modal-header">
+        <div class="modal-header-title" id="modalTitle">💬 参加者の感想</div>
+        <button class="modal-close" onclick="closeReviews()" title="閉じる">✕</button>
+      </div>
+
+      <!-- スポット切り替えタブ -->
+      <div class="modal-tabs">
+        <button class="modal-tab active" data-filter="all" onclick="openReviews('all')">✨ 全8件すべて</button>
+        <button class="modal-tab" data-filter="spot1" onclick="openReviews('spot1')">🍽️ はとばキッチン (2)</button>
+        <button class="modal-tab" data-filter="spot2" onclick="openReviews('spot2')">🚢 駿河湾クルーズ (2)</button>
+        <button class="modal-tab" data-filter="spot3" onclick="openReviews('spot3')">🌲 三保の松原 (2)</button>
+        <button class="modal-tab" data-filter="spot4" onclick="openReviews('spot4')">⛩️ 久能山東照宮 (2)</button>
+      </div>
+
+      <div class="modal-body">
+        <div class="modal-reviews-grid" id="modalReviewsGrid">
+
+          <!-- 1. はとばキッチン (1) -->
+          <div class="review-card" data-spot="spot1">
+            <div class="review-top">
+              <span class="review-spot-badge">🍽️ はとばキッチン</span>
+              <span class="review-stars">★★★★★</span>
+            </div>
+            <div class="review-user">
+              <div class="review-avatar">👩‍🍳</div>
+              <div class="review-meta">
+                <span class="review-title">「デザートも料理も大満足！」</span>
+                <span class="review-author">パティシエ科 1年・Aさん</span>
+              </div>
+            </div>
+            <p class="review-text">地元静岡の新鮮な野菜や焼きたてピザ、さらにケーキなどのスイーツまで種類が豊富で最高でした！友達とシェアしながら楽しくランチができました。</p>
+          </div>
+
+          <!-- 2. はとばキッチン (2) -->
+          <div class="review-card" data-spot="spot1">
+            <div class="review-top">
+              <span class="review-spot-badge">🍽️ はとばキッチン</span>
+              <span class="review-stars">★★★★★</span>
+            </div>
+            <div class="review-user">
+              <div class="review-avatar">👨‍💻</div>
+              <div class="review-meta">
+                <span class="review-title">「港の景色を見ながら贅沢ビュッフェ」</span>
+                <span class="review-author">コンピュータ科 1年・Bさん</span>
+              </div>
+            </div>
+            <p class="review-text">大きな窓からヨットハーバーを眺めながら食べるバイキングは開放感抜群でした。出来立ての温かい料理ばかりで、何度もおかわりしてしまいました！</p>
+          </div>
+
+          <!-- 3. 駿河湾クルーズ (1) -->
+          <div class="review-card" data-spot="spot2">
+            <div class="review-top">
+              <span class="review-spot-badge">🚢 駿河湾クルーズ</span>
+              <span class="review-stars">★★★★★</span>
+            </div>
+            <div class="review-user">
+              <div class="review-avatar">🧑‍🎓</div>
+              <div class="review-meta">
+                <span class="review-title">「海の上から見る富士山に感動！」</span>
+                <span class="review-author">コンピュータ科 2年・Cさん</span>
+              </div>
+            </div>
+            <p class="review-text">船のデッキに出て潮風を感じながら眺めた富士山は、今まで見た中で一番きれいでした。青い海と空のコントラストが素晴らしく、写真もたくさん撮れました。</p>
+          </div>
+
+          <!-- 4. 駿河湾クルーズ (2) -->
+          <div class="review-card" data-spot="spot2">
+            <div class="review-top">
+              <span class="review-spot-badge">🚢 駿河湾クルーズ</span>
+              <span class="review-stars">★★★★★</span>
+            </div>
+            <div class="review-user">
+              <div class="review-avatar">👩‍🎓</div>
+              <div class="review-meta">
+                <span class="review-title">「みんなで盛り上がれる最高の船旅」</span>
+                <span class="review-author">パティシエ科 2年・Dさん</span>
+              </div>
+            </div>
+            <p class="review-text">約40分間のクルーズはあっという間でした！カモメが近くを飛んでいたり、波しぶきがキラキラ光っていたりして、クラスの仲間と最高の思い出が作れました。</p>
+          </div>
+
+          <!-- 5. 三保の松原 (1) -->
+          <div class="review-card" data-spot="spot3">
+            <div class="review-top">
+              <span class="review-spot-badge">🌲 三保の松原</span>
+              <span class="review-stars">★★★★★</span>
+            </div>
+            <div class="review-user">
+              <div class="review-avatar">🙍‍♂️</div>
+              <div class="review-meta">
+                <span class="review-title">「世界遺産の絶景に心が癒されました」</span>
+                <span class="review-author">コンピュータ科 1年・Eさん</span>
+              </div>
+            </div>
+            <p class="review-text">「神の道」と呼ばれる立派な松並木を歩いて抜けた先に広がる、黒い砂浜と青い海、そして富士山の景色は圧巻でした。日本の自然の美しさを肌で感じました。</p>
+          </div>
+
+          <!-- 6. 三保の松原 (2) -->
+          <div class="review-card" data-spot="spot3">
+            <div class="review-top">
+              <span class="review-spot-badge">🌲 三保の松原</span>
+              <span class="review-stars">★★★★★</span>
+            </div>
+            <div class="review-user">
+              <div class="review-avatar">🙍‍♀️</div>
+              <div class="review-meta">
+                <span class="review-title">「羽衣伝説の歴史に触れる散策」</span>
+                <span class="review-author">パティシエ科 1年・Fさん</span>
+              </div>
+            </div>
+            <p class="review-text">有名な「羽衣の松」を実際に見ることができて感動しました。波の音を聞きながら友達とゆっくり海岸を散歩して、とてもリフレッシュできました。</p>
+          </div>
+
+          <!-- 7. 久能山東照宮 (1) -->
+          <div class="review-card" data-spot="spot4">
+            <div class="review-top">
+              <span class="review-spot-badge">⛩️ 久能山東照宮</span>
+              <span class="review-stars">★★★★★</span>
+            </div>
+            <div class="review-user">
+              <div class="review-avatar">👨‍🎓</div>
+              <div class="review-meta">
+                <span class="review-title">「国宝社殿の豪華な彫刻にびっくり！」</span>
+                <span class="review-author">コンピュータ科 2年・Gさん</span>
+              </div>
+            </div>
+            <p class="review-text">徳川家康公が祀られている国宝の社殿は、金箔や極彩色の彫刻が本当に細かく美しくて見入ってしまいました。日本の伝統建築のすごさを改めて学びました。</p>
+          </div>
+
+          <!-- 8. 久能山東照宮 (2) -->
+          <div class="review-card" data-spot="spot4">
+            <div class="review-top">
+              <span class="review-spot-badge">⛩️ 久能山東照宮</span>
+              <span class="review-stars">★★★★★</span>
+            </div>
+            <div class="review-user">
+              <div class="review-avatar">👩‍🎓</div>
+              <div class="review-meta">
+                <span class="review-title">「歴史とパワーをもらえる特別な場所」</span>
+                <span class="review-author">パティシエ科 2年・Hさん</span>
+              </div>
+            </div>
+            <p class="review-text">神聖な雰囲気の中で参拝し、日本の歴史を深く知る良い機会になりました。高台から見下ろす駿河湾の景色も素晴らしく、元気とパワーをもらえました！</p>
+          </div>
+
+        </div>
+      </div>
+    </div>
   </div>
 
   <footer>
     <p>※バス走行中は安全のため必ずシートベルトの着用をお願いいたします。</p>
     <p style="margin-top: 4px;">企画手配：株式会社 第一観光</p>
   </footer>
+
+  <script>
+    const spotTitles = {
+      all: '💬 参加者の感想（全8件）',
+      spot1: '🍽️ エスパルスドリームプラザ「はとばキッチン」の感想',
+      spot2: '🚢 駿河湾クルーズ（清水港）の感想',
+      spot3: '🌲 三保の松原の感想',
+      spot4: '⛩️ 久能山東照宮の感想'
+    };
+
+    function openReviews(filter) {
+      const modal = document.getElementById('reviewModal');
+      const title = document.getElementById('modalTitle');
+      const cards = document.querySelectorAll('#modalReviewsGrid .review-card');
+      const tabs = document.querySelectorAll('.modal-tab');
+
+      title.textContent = spotTitles[filter] || spotTitles.all;
+
+      tabs.forEach(tab => {
+        tab.classList.toggle('active', tab.getAttribute('data-filter') === filter);
+      });
+
+      cards.forEach(card => {
+        if (filter === 'all' || card.getAttribute('data-spot') === filter) {
+          card.style.display = 'flex';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeReviews() {
+      const modal = document.getElementById('reviewModal');
+      modal.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    function handleOverlayClick(event) {
+      if (event.target.id === 'reviewModal') {
+        closeReviews();
+      }
+    }
+
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') closeReviews();
+    });
+  </script>
 
 </body>
 </html>
